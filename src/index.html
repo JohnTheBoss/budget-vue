@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Budget App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="app">
+        <div class="navbar">
+            <div class="left">
+                
+            </div>
+            <div class="center">
+                Budget App
+            </div>
+            <div class="right">
+                
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="income">
+                Income: <span class="text-right">$ 150</span>
+            </div>
+            <div class="expenses">
+                Expenses: <span class="text-right">- $ 100</span>
+            </div>
+
+            <div class="total">
+                <span class="text-right">$ 50</span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="dailyItem">
+                <div class="dailyHead">
+                    <div class="dateRow">
+                        <span class="dayNumber">23</span>
+                        <span class="date">Today<br>August 2018</span>
+                    </div>
+                    <div class="moneyRow">- $100</div>
+                    <div class="clearfix"></div>
+                </div>
+    
+                <div class="dailyBody">
+                    <div class="item">
+                        <i>E</i>
+                        Eletronic
+                        <span class="text-right">- $ 20</span>
+                    </div>
+    
+                    <div class="item">
+                        <i>W</i>
+                        Work
+                        <span class="text-right">+ $ 40</span>
+                    </div>
+    
+                    <div class="item">
+                        <i>C</i>
+                        Car
+                        <span class="text-right">- $ 80</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dailyItem">
+                    <div class="dailyHead">
+                        <div class="dateRow">
+                            <span class="dayNumber">22</span>
+                            <span class="date">Yesterday<br>August 2018</span>
+                        </div>
+                        <div class="moneyRow">+ $50</div>
+                        <div class="clearfix"></div>
+                    </div>
+        
+                    <div class="dailyBody">
+                        <div class="item">
+                            <i>W</i>
+                            Work
+                            <span class="text-right">+ $ 50</span>
+                        </div>
+                    </div>
+                </div>
+
+    </main>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- production version, optimized for size and speed --
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script defer src="app.js"></script>
+</body>
+</html>
