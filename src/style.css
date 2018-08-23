@@ -136,6 +136,7 @@ body {
 }
 
 .dailyItem .moneyRow {
+    padding-top: 8px;
     float: right;
     font-size: 40px;
     color: #000;
