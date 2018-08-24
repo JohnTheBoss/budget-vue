@@ -11,6 +11,16 @@ let app = new Vue({
           { type: 'inc', icon: "W", name: "Work", total: 40 },
           { type: 'exp', icon: "C", name: "Car", total: 80 }
         ]
+      },
+      {
+        date: moment("2018-08-22"), item: [
+          { type: 'exp', icon: "R", name: "Restaurant", total: 85 }
+        ]
+      },
+      {
+        date: moment("2018-08-10"), item: [
+          { type: 'inc', icon: "W", name: "Work", total: 150 }
+        ]
       }
     ]
   },
@@ -37,6 +47,38 @@ let app = new Vue({
       } else {
         return sum;
       }
+    },
+    updateHeader: function () {
+      // First Clear
+      this.$data.income = 0;
+      this.$data.expense = 0;
+
+      this.$data.dailyBudge.forEach(element => {
+        element.item.forEach(dailyitem => {
+          if (dailyitem.type === 'inc') {
+            this.$data.income += dailyitem.total;
+          } else {
+            this.$data.expense += dailyitem.total;
+          }
+        });
+      });
+    },
+    // getHeaderTotal(true) -> return string
+    // getHeaderTotal(false) -> return number
+    getHeaderTotal: function (is_string = false) {
+      let prefix = '+';
+      let total = this.$data.income - this.$data.expense;
+
+      if (is_string) {
+        if (total < 0) {
+          prefix = '-';
+        }
+        return prefix + " $ " + Math.abs(total);
+      } else {
+        return total;
+      }
     }
   },
 });
+
+app.updateHeader();

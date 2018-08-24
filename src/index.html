@@ -28,14 +28,14 @@
 
         <div class="header">
             <div class="income">
-                Income: <span class="text-right">$ {{income}}</span>
+                Income: <span class="text-right">+ $ {{income}}</span>
             </div>
             <div class="expenses">
-                Expenses: <span class="text-right">$ {{expense}}</span>
+                Expenses: <span class="text-right">- $ {{expense}}</span>
             </div>
 
             <div class="total">
-                <span class="text-right">$ {{income - expense}}</span>
+                <span class="text-right">{{getHeaderTotal(true)}}</span>
             </div>
             <div class="clearfix"></div>
         </div>
