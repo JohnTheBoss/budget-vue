@@ -1,6 +1,69 @@
+let ionicons = [
+  "airplane", "american-football",
+  "logo-android", "logo-apple",
+  "baseball", "basket",
+  "bed", "beer",
+  "bicycle", "boat",
+  "book", "bowtie",
+  "bug", "build",
+  "bus", "business",
+  "cafe", "calendar",
+  "call", "camera",
+  "car", "card",
+  "cart", "cash",
+  "color-palette", "compass",
+  "construct", "cube",
+  "cut", "logo-dropbox",
+  "logo-euro", "film",
+  "fitness", "flask",
+  "folder", "folder-open",
+  "logo-game-controller-a", "logo-game-controller-b",
+  "gift", "glasses",
+  "globe", "grid",
+  "hammer", "headset",
+  "heart", "home",
+  "ice-cream", "images",
+  "infinite", "key",
+  "laptop", "leaf",
+  "lock", "mail",
+  "map", "medal",
+  "medical", "medkit",
+  "megaphone", "microphone",
+  "moon", "musical-notes",
+  "navigate", "notifications",
+  "paper", "paw",
+  "pint", "pizza",
+  "logo-playstation", "print",
+  "pulse", "radio",
+  "restaurant", "rose",
+  "school", "settings",
+  "shirt", "logo-skype",
+  "snow", "logo-steam",
+  "subway", "sunny",
+  "tablet-portrait", "tennisball",
+  "text", "time",
+  "today", "train",
+  "trash", "trending-down",
+  "trending-up", "trophy",
+  "tv", "umbrella",
+  "usd", "wallet",
+  "watch", "water", "logo-windows",
+  "wine", "logo-xbox",
+  "logo-yen", "logo-youtube"
+];
+
 let app = new Vue({
   el: 'main#app',
   data: {
+    newItemData: {
+      dateType: 'today',
+      manualDate: '',
+      itemName: '',
+      selectedIcon: null,
+      type: '',
+      amount: ''
+    },
+    ionicons: ionicons,
     moment: moment,
     income: 0,
     expense: 0,
@@ -77,8 +140,55 @@ let app = new Vue({
       } else {
         return total;
       }
+    },
+    getIconClass: function (icon) {
+      if (icon.includes('logo-')) {
+        return 'icon ion-' + icon;
+      } else {
+        return 'icon ion-ios-' + icon;
+      }
+    },
+    addNewItem: function () {
+      alert('RUN');
     }
   },
 });
 
 app.updateHeader();
+
+
+// Get the modal
+var modal = document.getElementById('addItem');
+var btn = document.getElementById("addItemBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function () {
+  modal.style.display = "block";
+}
+span.onclick = function () {
+  modal.style.display = "none";
+}
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function formatIconSelect(icon) {
+  if (!icon.id) { return icon.text; }
+
+  let type = "ios-"
+  if (icon.element.value.includes('logo-')) {
+    type = "";
+  }
+  let $icon = $(
+    '<span><i class="icon ion-' + type + icon.element.value + '"/> ' + icon.text + '</span>'
+  );
+  return $icon;
+}
+
+$('#iconSelect').select2({
+  width: "100%",
+  templateResult: formatIconSelect
+}).on('change', function () {
+  app.$data.selectedIcon = this.value;
+});
