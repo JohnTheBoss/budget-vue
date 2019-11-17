@@ -2,15 +2,21 @@
   <div>
     <div class="header">
       <div class="top">
-        <div class="left"></div>
+        <div class="left">
+          <div class="locale-changer">
+            <select v-model="$i18n.locale">
+              <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
+            </select>
+          </div>
+        </div>
         <div class="center">BUDGET-APP</div>
         <div class="right"></div>
       </div>
 
       <div class="headerBox">
         <div class="top">
-          <span class="small">Egyenleg</span>
-          <h1>{{currentMoney}}</h1>
+          <span class="small">{{$t('balance')}}</span>
+          <h1>{{ $t('money_format', {money: currentMoney}) }}</h1>
         </div>
         <div class="body">
           <budgetChart :chartData="renderBalanceChartData" :options="renderBalanceChartOptions"></budgetChart>
@@ -20,19 +26,18 @@
 
     <div class="wrap">
       <div>
-        Havi áttekintő
+        {{$t('monthly_overview')}}
         <div class="row">
           <div class="box w-50 align-items-center">
-            <span class="small">E havi kiadás</span>
-            <h2>{{totalExp}}</h2>
+            <span class="small">{{$t('monthly_expenses')}}</span>
+            <h2>{{ $t('money_format', {money: totalExp}) }}</h2>
           </div>
           <div class="box w-50 align-items-center">
-            <span class="small">E havi bevétel</span>
-            <h2>{{totalInc}}</h2>
+            <span class="small">{{$t('monthly_income')}}</span>
+            <h2>{{ $t('money_format', {money: totalInc}) }}</h2>
           </div>
         </div>
       </div>
- 
     </div>
   </div>
 </template>
@@ -51,6 +56,7 @@ export default {
         name: "",
         total: ""
       },
+      langs: Object.keys(this.$i18n.messages),
       items: [
         { date: "2019-11-01", name: "Work", total: "5000" },
         { date: "2019-11-01", name: "Cinema", total: "-2000" },
@@ -72,6 +78,11 @@ export default {
         name: "",
         total: ""
       };
+    },
+    formatMoney: function(m) {
+      return this.$i18n.t("money_format", {
+        money: m
+      });
     }
   },
   computed: {
@@ -111,29 +122,55 @@ export default {
           display: false
         },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                callback: (value, index, values) => {
+                  return this.formatMoney(value);
+                }
+              }
+            }
+          ]
+        },
+        tooltips: {
+          enabled: true,
+          callbacks: {
+            label: (tooltipItems, data) => {
+              return this.formatMoney(tooltipItems.yLabel);
+            }
+          }
+        }
       };
     },
     BalanceChartData: function() {
       let dates = this.BalanceChartLabels;
       let dalySum = [];
-      
+
       let beforeDay = 0;
 
       dates.forEach(e => {
         let all = this.items.filter(item => item.date == e);
-        let today = all.reduce((t, { total }) => parseInt(t) + parseInt(total), 0);
+        let today = all.reduce(
+          (t, { total }) => parseInt(t) + parseInt(total),
+          0
+        );
         dalySum.push(beforeDay + today);
         beforeDay += today;
       });
 
       return dalySum;
     },
-    totalExp: function(){
-        return this.items.filter(({total}) => parseInt(total) < 0).reduce((sum, {total}) => sum + parseInt(total),0);
+    totalExp: function() {
+      return this.items
+        .filter(({ total }) => parseInt(total) < 0)
+        .reduce((sum, { total }) => sum + parseInt(total), 0);
     },
-    totalInc: function(){
-        return this.items.filter(({total}) => parseInt(total) > 0).reduce((sum, {total}) => sum + parseInt(total),0);
+    totalInc: function() {
+      return this.items
+        .filter(({ total }) => parseInt(total) > 0)
+        .reduce((sum, { total }) => sum + parseInt(total), 0);
     }
   }
 };
