@@ -1,4 +1,5 @@
 import Home from '@/pages/Home';
+import PageNotFound from "@/pages/PageNotFound";
 // const AppNAME = () => import('@/components/AppNAME');
 
 
@@ -7,7 +8,11 @@ const routes = [
         path: '/',
         name: 'Home',
         component: Home,
-        meta: { title: 'Home | Budget App' }
+    },
+    { 
+        path: '*', 
+        name: 'PageNotFound',
+        component: PageNotFound
     }
 ];
 
