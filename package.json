@@ -17,7 +17,9 @@
   "homepage": "https://github.com/JohnTheBoss/budget-vue",
   "dependencies": {
     "@babel/polyfill": "~7.2",
+    "chart.js": "^2.9.3",
     "vue": "~2.6",
+    "vue-chartjs": "^3.5.0",
     "vue-router": "~3.0"
   },
   "devDependencies": {
