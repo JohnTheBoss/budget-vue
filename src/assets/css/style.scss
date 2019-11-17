@@ -86,9 +86,15 @@ body {
   border-radius: 1em;
   &:first-child {
     margin: 0.5em 0.5em 0.5em 0;
+    @media screen and (max-width: 360px) {
+        margin: 0.5em 0 0.5em 0;
+      }
   }
   &:last-child {
     margin: 0.5em 0 0.5em 0.5em;
+    @media screen and (max-width: 360px) {
+        margin: 0.5em 0 0.5em 0;
+      }
   }
 }
 
