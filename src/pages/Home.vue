@@ -38,6 +38,20 @@
           </div>
         </div>
       </div>
+
+      <div>
+        {{$t('transactions')}}
+        <div class="transactions">
+          <div class="transaction" v-for="(item, index) in getTransactions" v-bind:key="'trans_'+index">
+            <div class="category"></div>
+            <div class="content">{{item.name}}</div>
+            <div class="info">
+              <div class="total">{{formatMoney(item.total)}}</div>
+              <div class="date">{{item.date}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -80,10 +94,17 @@ export default {
       };
     },
     formatMoney: function(m) {
-        return new Intl.NumberFormat(this.$i18n.locale, { style: 'currency', currency: this.$i18n.t('currency') }).format(m);
+      return new Intl.NumberFormat(this.$i18n.locale, {
+        style: "currency",
+        currency: this.$i18n.t("currency")
+      }).format(m);
     }
   },
   computed: {
+    getTransactions: function(){
+        const orign = JSON.parse(JSON.stringify(this.items));
+        return orign.sort((a, b) => (a.date < b.date) ? 1 : (a.date === b.date) ? ((a.name > b.name) ? 1 : -1) : -1 );
+    },
     currentMoney: function() {
       return Object.values(this.items).reduce(
         (t, { total }) => parseInt(t) + parseInt(total),
