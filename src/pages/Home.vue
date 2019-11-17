@@ -16,7 +16,7 @@
       <div class="headerBox">
         <div class="top">
           <span class="small">{{$t('balance')}}</span>
-          <h1>{{ $t('money_format', {money: currentMoney}) }}</h1>
+          <h1>{{ formatMoney(currentMoney) }}</h1>
         </div>
         <div class="body">
           <budgetChart :chartData="renderBalanceChartData" :options="renderBalanceChartOptions"></budgetChart>
@@ -30,11 +30,11 @@
         <div class="row">
           <div class="box w-50 align-items-center">
             <span class="small">{{$t('monthly_expenses')}}</span>
-            <h2>{{ $t('money_format', {money: totalExp}) }}</h2>
+            <h2>{{ formatMoney(totalExp) }}</h2>
           </div>
           <div class="box w-50 align-items-center">
             <span class="small">{{$t('monthly_income')}}</span>
-            <h2>{{ $t('money_format', {money: totalInc}) }}</h2>
+            <h2>{{ formatMoney(totalInc) }}</h2>
           </div>
         </div>
       </div>
@@ -80,9 +80,7 @@ export default {
       };
     },
     formatMoney: function(m) {
-      return this.$i18n.t("money_format", {
-        money: m
-      });
+        return new Intl.NumberFormat(this.$i18n.locale, { style: 'currency', currency: this.$i18n.t('currency') }).format(m);
     }
   },
   computed: {
