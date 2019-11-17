@@ -18,7 +18,7 @@ const router = new VueRouter({
 
 const DEFAULT_TITLE = 'Budget App';
 router.afterEach((to, from) => {
-    document.title = to.meta.title || DEFAULT_TITLE;
+    document.title = to.name + " | " + DEFAULT_TITLE  || DEFAULT_TITLE;
 });
 
 new Vue({
