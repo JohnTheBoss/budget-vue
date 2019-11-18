@@ -33,6 +33,8 @@ const webpackConfig = merge(commonConfig, {
         hot: true,
         open: true,
         overlay: true,
+        host: '0.0.0.0',
+        disableHostCheck: true,
         port: 8000,
         stats: {
             normal: true
