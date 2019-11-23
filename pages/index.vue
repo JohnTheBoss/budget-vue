@@ -1,29 +1,14 @@
 <template>
   <div>
-    <div class="header">
+    <Header>
       <div class="top">
-        <div class="left">
-          <div class="locale-changer">
-            <select v-model="$i18n.locale">
-              <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
-            </select>
-          </div>
-        </div>
-        <div class="center">BUDGET-APP</div>
-        <div class="right"></div>
+        <span class="small">{{$t('balance')}}</span>
+        <h1>{{ formatMoney(currentMoney) }}</h1>
       </div>
-
-      <div class="headerBox">
-        <div class="top">
-          <span class="small">{{$t('balance')}}</span>
-          <h1>{{ formatMoney(currentMoney) }}</h1>
-        </div>
-        <div class="body">
-          <budgetChart :chartData="renderBalanceChartData" :options="renderBalanceChartOptions"></budgetChart>
-        </div>
+      <div class="body">
+        <budgetChart :chartData="renderBalanceChartData" :options="renderBalanceChartOptions"></budgetChart>
       </div>
-    </div>
-
+    </Header>
     <div class="wrap">
       <div>
         {{$t('monthly_overview')}}
@@ -42,7 +27,11 @@
       <div>
         {{$t('transactions')}}
         <div class="transactions">
-          <div class="transaction" v-for="(item, index) in getTransactions" v-bind:key="'trans_'+index">
+          <div
+            class="transaction"
+            v-for="(item, index) in getTransactions"
+            v-bind:key="'trans_'+index"
+          >
             <div class="category"></div>
             <div class="content">{{item.name}}</div>
             <div class="info">
@@ -57,15 +46,17 @@
 </template>
 
 <script>
+import Header from "~/components/Header";
 import budgetChart from "~/components/budgetChart";
 export default {
   components: {
+    Header,
     budgetChart
   },
   head: function() {
     return {
-      title: "Dashboard",
-    }
+      title: "Dashboard"
+    };
   },
   data: function() {
     return {
@@ -73,13 +64,12 @@ export default {
         date: "",
         name: "",
         total: ""
-      },
-      langs: Object.keys(this.$i18n.messages)
+      }
     };
   },
   methods: {
     addNewItem: function() {
-      this.$store.commit('transactions/add', this.newItem);
+      this.$store.commit("transactions/add", this.newItem);
       this.newItem = {
         date: "",
         name: "",
@@ -94,12 +84,20 @@ export default {
     }
   },
   computed: {
-    items: function(){
+    items: function() {
       return this.$store.state.transactions.items;
     },
-    getTransactions: function(){
-        const orign = JSON.parse(JSON.stringify(this.items));
-        return orign.sort((a, b) => (a.date < b.date) ? 1 : (a.date === b.date) ? ((a.name > b.name) ? 1 : -1) : -1 );
+    getTransactions: function() {
+      const orign = JSON.parse(JSON.stringify(this.items));
+      return orign.sort((a, b) =>
+        a.date < b.date
+          ? 1
+          : a.date === b.date
+          ? a.name > b.name
+            ? 1
+            : -1
+          : -1
+      );
     },
     currentMoney: function() {
       return Object.values(this.items).reduce(
