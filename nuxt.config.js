@@ -1,9 +1,3 @@
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-  router: {
-    base: '/budget-vue/'
-  }
-} : {}
-
 export default {
   mode: 'spa',
   /*
@@ -30,6 +24,11 @@ export default {
   css: [
     '@/assets/style.scss'
   ],
+
+  router: {
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/budget-vue/' : "/"
+  },
+
   /*
   ** Plugins to load before mounting the App
   */
