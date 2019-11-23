@@ -1,3 +1,8 @@
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/budget-vue/'
+  }
+} : {}
 
 export default {
   mode: 'spa',
