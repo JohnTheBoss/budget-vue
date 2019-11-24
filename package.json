@@ -12,6 +12,9 @@
     "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
     "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate"
   },
+  "engines": {
+    "node": "10.17.0"
+  },
   "dependencies": {
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.3.6",
