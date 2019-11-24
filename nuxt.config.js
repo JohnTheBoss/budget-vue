@@ -29,6 +29,10 @@ module.exports = {
     base: process.env.DEPLOY_ENV === "GH_PAGES" ? "/budget-vue/" : "/"
   },
 
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
   /*
    ** Plugins to load before mounting the App
    */
