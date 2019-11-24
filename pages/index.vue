@@ -49,6 +49,7 @@
 import Header from "~/components/Header";
 import budgetChart from "~/components/budgetChart";
 export default {
+  middleware: ["auth"],
   components: {
     Header,
     budgetChart

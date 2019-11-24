@@ -9,7 +9,9 @@
         </div>
       </div>
       <div class="center">BUDGET-APP</div>
-      <div class="right"></div>
+      <div class="right">
+        <button @click="$auth.logout()">LogOut</button>
+      </div>
     </div>
 
     <div class="headerBox">

@@ -1,67 +1,93 @@
-export default {
-  mode: 'spa',
+module.exports = {
+  mode: "universal",
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    titleTemplate: '%s - BudgetAPP',
+    titleTemplate: "%s - BudgetAPP",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || ""
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#3351ff' },
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#3351ff" },
   /*
-  ** Global CSS
-  */
-  css: [
-    '@/assets/style.scss'
-  ],
+   ** Global CSS
+   */
+  css: ["@/assets/style.scss"],
 
   router: {
-    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/budget-vue/' : "/"
+    base: process.env.DEPLOY_ENV === "GH_PAGES" ? "/budget-vue/" : "/"
   },
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '~/plugins/i18n.js'
-  ],
+   ** Plugins to load before mounting the App
+   */
+  plugins: ["~/plugins/i18n.js"],
   /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-  ],
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    "@nuxtjs/axios",
+    "@nuxtjs/auth",
+    "@nuxtjs/pwa"
   ],
   /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
-  axios: {
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
+  axios: {},
+
+  auth: {
+    // Options
+    redirect: {
+      login: "/auth/login",
+      logout: "/auth/login",
+      callback: "/auth/login",
+      home: "/"
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/api/auth/login",
+            method: "post",
+            propertyName: "token"
+          },
+          user: {
+            url: "/api/auth/current",
+            method: "get",
+            propertyName: "user",
+            tokenRequired: true,
+            tokenType: "bearer"
+          }
+        },
+        tokenRequired: true,
+        tokenType: "bearer"
+      }
+    }
   },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-    }
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {}
   }
-}
+};
