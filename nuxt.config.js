@@ -1,5 +1,23 @@
+const dotEnv = require("dotenv");
+dotEnv.config();
+
+const checkEnv = require("check-env");
+checkEnv(["FB_API_KEY", "FB_AUTH_DOMAIN", "FB_DB_URL", "FB_PROJECT_ID", "FB_STORAGE_BUCKET", "FB_MESSAGING_SENDER_ID", "FB_APP_ID"]);
+
 export default {
   mode: 'spa',
+
+  env: {
+    FB_API_KEY: process.env.FB_API_KEY,
+    FB_AUTH_DOMAIN: process.env.FB_AUTH_DOMAIN,
+    FB_DB_URL: process.env.FB_DB_URL,
+    FB_PROJECT_ID: process.env.FB_PROJECT_ID,
+    FB_STORAGE_BUCKET: process.env.FB_STORAGE_BUCKET,
+    FB_MESSAGING_SENDER_ID: process.env.FB_MESSAGING_SENDER_ID,
+    FB_APP_ID: process.env.FB_APP_ID
+  },
+
+
   /*
   ** Headers of the page
   */
@@ -33,7 +51,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/i18n.js'
+    '~/plugins/i18n.js',
+    '~/plugins/firebase.js'
   ],
   /*
   ** Nuxt.js dev-modules

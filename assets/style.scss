@@ -1,3 +1,17 @@
+// @import '../node_modules/typeface-muli/index.css';
+
+@font-face {
+    font-family: 'Muli';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src:
+      local('Muli Regular '),
+      local('Muli-Regular'),
+      url('../node_modules/typeface-muli/files/muli-latin-400.woff2') format('woff2'), /* Super Modern Browsers */
+      url('../node_modules/typeface-muli/files/muli-latin-400.woff') format('woff'); /* Modern Browsers */
+  }
+
 * {
     padding: 0;
     margin: 0;
@@ -5,6 +19,7 @@
   html,
   body {
     background-color: #f8f8f8;
+    font-family: 'Muli', sans-serif;
   }
   
   .wrap {

@@ -46,9 +46,11 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import Header from "~/components/Header";
 import budgetChart from "~/components/budgetChart";
 export default {
+  middleware: ['auth'],
   components: {
     Header,
     budgetChart
@@ -81,6 +83,9 @@ export default {
         style: "currency",
         currency: this.$i18n.t("currency")
       }).format(m);
+    },
+    logout() {
+      firebase.auth().signOut();
     }
   },
   computed: {
