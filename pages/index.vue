@@ -49,7 +49,7 @@
 import Header from "~/components/Header";
 import budgetChart from "~/components/budgetChart";
 export default {
-  middleware: ["auth"],
+  layout: "main",
   components: {
     Header,
     budgetChart
@@ -190,5 +190,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.transactions{
+  
+}
 </style>
