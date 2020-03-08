@@ -25,11 +25,12 @@
 
 <script>
 export default {
+  middleware: "guest",
   data: () => ({
     formData: {
       email: "",
       password: ""
-    },
+    }
   }),
   methods: {
     async signInUser() {
