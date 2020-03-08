@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">budget-vue</h1>
-      <h2 class="subtitle">Simple Budget App</h2>
+      <h2 class="subtitle">Hello, {{user.displayName}}!</h2>
       <div class="links">
         <button class="button--green" @click="logout()">Logout</button>
       </div>
@@ -18,6 +18,11 @@ export default {
   middleware: "auth",
   components: {
     Logo
+  },
+  computed: {
+    user () {
+      return this.$store.state.authUser;
+    }
   },
   methods: {
     async logout() {
