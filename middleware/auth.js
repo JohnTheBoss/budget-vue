@@ -1,5 +1,5 @@
-export default function ({ app, redirect }) {
-    if (app.$fireAuth.currentUser === null) {
+export default function ({ store, redirect }) {
+    if (!store.getters.isLoggedIn) {
       return redirect('/auth/login');
     }
   }

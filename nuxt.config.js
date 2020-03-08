@@ -66,7 +66,12 @@ export default {
       measurementId: process.env.FireBase_measurementId
     },
     services: {
-      auth: true // Just as example. Can be any other service.
+      auth: {
+        initialize: {
+          onSuccessAction: 'handleSuccessfulAuthentication',
+          ssr: false
+        }
+      },
     }
   },
 
