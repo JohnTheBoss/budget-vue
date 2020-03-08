@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 export default {
   mode: 'spa',
@@ -43,6 +44,8 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    // Docs: https://firebase.nuxtjs.org/guide
+    '@nuxtjs/firebase',
   ],
   /*
   ** Axios module configuration
@@ -50,6 +53,23 @@ export default {
   */
   axios: {
   },
+
+  firebase: {
+    config: {
+      apiKey: process.env.FireBase_apiKey,
+      authDomain: process.env.FireBase_authDomain,
+      databaseURL: process.env.FireBase_databaseURL,
+      projectId: process.env.FireBase_projectId,
+      storageBucket: process.env.FireBase_storageBucket,
+      messagingSenderId: process.env.FireBase_messagingSenderId,
+      appId: process.env.FireBase_appId,
+      measurementId: process.env.FireBase_measurementId
+    },
+    services: {
+      auth: true // Just as example. Can be any other service.
+    }
+  },
+
   /*
   ** Build configuration
   */
@@ -57,7 +77,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }
