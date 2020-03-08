@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Logo from "~/components/Logo.vue";
 
 export default {
@@ -20,19 +21,21 @@ export default {
     Logo
   },
   computed: {
-    user () {
+    user() {
       return this.$store.state.authUser;
     }
   },
   methods: {
+    ...mapActions({
+      logoutUser: "logoutUser"
+    }),
     async logout() {
       try {
-        await this.$fireAuth.signOut();
+        await this.logoutUser().then(() => {
+          this.$router.push("/auth/login");
+        });
       } catch (e) {
-        console.error(e);
-      } finally {
-        alert("Successfull LogOut!");
-        this.$router.push("/auth/login");
+        alert(e);
       }
     }
   }
