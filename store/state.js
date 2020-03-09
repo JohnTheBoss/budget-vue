@@ -1,3 +1,8 @@
 export default () => ({
-    authUser: null
+    authUser: {
+      avatar: null,
+      displayName: null,
+      email: null,
+      uid: null
+    }
   })
