@@ -86,7 +86,7 @@ export default {
     services: {
       auth: {
         initialize: {
-          onSuccessAction: 'handleSuccessfulAuthentication',
+          onSuccessAction: 'auth/handleSuccessfulAuthentication',
           ssr: false
         }
       },
