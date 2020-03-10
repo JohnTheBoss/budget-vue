@@ -1,15 +1,28 @@
 <template>
   <div>
-    <div class="navbar">Budget-App Header</div>
-    <div class="container">
-      <div>
-        <logo />
-        <h1 class="title">budget-vue</h1>
-        <h2 class="subtitle">Hello, {{user.displayName}}!</h2>
-        <div class="links">
-          <button class="button--green" @click="writeToRealtimeDb()">Write DB</button>
-          <button class="button--green" @click="getData()">READ DB</button>
-          <button class="button--green" @click="logout()">Logout</button>
+    <div class="navbar">
+      Budget-App | Hello, {{user.displayName}}!
+      <a
+        href="javascript:void();"
+        class="text-white"
+        @click="logout()"
+      >Logout</a>
+    </div>
+    <div class="app-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 text-center">
+            <div class="budgetinfo-box expense-box">
+              <small>Expense:</small>
+              <h1>0</h1>
+            </div>
+          </div>
+          <div class="col-6 text-center">
+            <div class="budgetinfo-box income-box">
+              <small>Income</small>
+              <h1>0</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +46,7 @@ export default {
   methods: {
     ...mapActions({
       logoutUser: "auth/logoutUser",
-      getData:"transactions/getTransactions"
+      getData: "transactions/getTransactions"
     }),
 
     async logout() {
@@ -78,14 +91,19 @@ $mainColor: #3351ff;
   color: #ffffff;
 }
 
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.budgetinfo-box{
+  border-radius: 1em;
+  margin-top: 1em;
+  color: #fff;
+  padding: .5em .25em;
+  &.expense-box{
+    background-color: #f5787e;
+  }
+  &.income-box{
+    background-color: #03a9f4;
+  }
 }
+
 
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
