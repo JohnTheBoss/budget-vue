@@ -52,7 +52,6 @@ export default {
           this.formData.email,
           this.formData.password
         );
-        alert("Sucessfull Login!");
         this.$router.push("/");
       } catch (e) {
         alert(e);
