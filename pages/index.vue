@@ -1,11 +1,15 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">budget-vue</h1>
-      <h2 class="subtitle">Hello, {{user.displayName}}!</h2>
-      <div class="links">
-        <button class="button--green" @click="logout()">Logout</button>
+  <div>
+    <div class="container">
+      <div>
+        <logo />
+        <h1 class="title">budget-vue</h1>
+        <h2 class="subtitle">Hello, {{user.displayName}}!</h2>
+        <div class="links">
+          <button class="button--green" @click="writeToRealtimeDb()">Write DB</button>
+          <button class="button--green" @click="readFromRealtimeDb()">READ DB</button>
+          <button class="button--green" @click="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </div>
@@ -37,12 +41,43 @@ export default {
       } catch (e) {
         alert(e);
       }
+    },
+    async writeToRealtimeDb() {
+
+      let key =this.$fireDb.ref(`transactions/${this.$store.state.authUser.uid}`).child(this.$store.state.authUser.uid).push().key;
+
+      const messageRef = this.$fireDb.ref(
+        `transactions/${this.$store.state.authUser.uid}/${key}`
+      );
+      try {
+        await messageRef.set({
+          currency: "HUF",
+          date: "2020-03-05 09:00",
+          name: "Ásványvíz",
+          value: 265
+        });
+      } catch (e) {
+        alert(e);
+        return;
+      }
+    },
+    async readFromRealtimeDb() {
+      const messageRef = this.$fireDb.ref(
+        `transactions/${this.$store.state.authUser.uid}`
+      );
+      try {
+        const snapshot = await messageRef.once("value");
+        console.log(snapshot.val());
+      } catch (e) {
+        alert(e);
+        return;
+      }
     }
   }
 };
 </script>
 
-<style>
+<style lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;
