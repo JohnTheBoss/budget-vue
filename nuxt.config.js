@@ -45,6 +45,25 @@ export default {
     '@nuxtjs/dotenv',
     // Docs: https://firebase.nuxtjs.org/guide
     '@nuxtjs/firebase',
+    [
+      'nuxt-fontawesome', {
+        component: 'fa', 
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['fas']
+          },
+          {
+            set: '@fortawesome/free-brands-svg-icons',
+            icons: ['fab']
+          },
+          {
+            set: '@fortawesome/free-regular-svg-icons',
+            icons: ['far']
+          }
+        ]
+      }
+    ]
   ],
   /*
   ** Axios module configuration
