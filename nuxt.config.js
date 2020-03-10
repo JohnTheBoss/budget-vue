@@ -90,6 +90,7 @@ export default {
           ssr: false
         }
       },
+      realtimeDb: true,
     }
   },
 
