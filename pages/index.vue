@@ -7,7 +7,7 @@
         <h2 class="subtitle">Hello, {{user.displayName}}!</h2>
         <div class="links">
           <button class="button--green" @click="writeToRealtimeDb()">Write DB</button>
-          <button class="button--green" @click="readFromRealtimeDb()">READ DB</button>
+          <button class="button--green" @click="getData()">READ DB</button>
           <button class="button--green" @click="logout()">Logout</button>
         </div>
       </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import Logo from "~/components/Logo.vue";
 
 export default {
@@ -26,13 +26,15 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.authUser;
+      return this.$store.state.auth.authUser;
     }
   },
   methods: {
     ...mapActions({
-      logoutUser: "logoutUser"
+      logoutUser: "auth/logoutUser",
+      getData:"transactions/getTransactions"
     }),
+
     async logout() {
       try {
         await this.logoutUser().then(() => {
@@ -43,11 +45,13 @@ export default {
       }
     },
     async writeToRealtimeDb() {
-
-      let key =this.$fireDb.ref(`transactions/${this.$store.state.authUser.uid}`).child(this.$store.state.authUser.uid).push().key;
+      let key = this.$fireDb
+        .ref(`transactions/${this.$store.state.auth.authUser.uid}`)
+        .child(this.$store.state.auth.authUser.uid)
+        .push().key;
 
       const messageRef = this.$fireDb.ref(
-        `transactions/${this.$store.state.authUser.uid}/${key}`
+        `transactions/${this.$store.state.auth.authUser.uid}/${key}`
       );
       try {
         await messageRef.set({
@@ -56,18 +60,6 @@ export default {
           name: "Ásványvíz",
           value: 265
         });
-      } catch (e) {
-        alert(e);
-        return;
-      }
-    },
-    async readFromRealtimeDb() {
-      const messageRef = this.$fireDb.ref(
-        `transactions/${this.$store.state.authUser.uid}`
-      );
-      try {
-        const snapshot = await messageRef.once("value");
-        console.log(snapshot.val());
       } catch (e) {
         alert(e);
         return;
