@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="navbar">Budget-App Header</div>
     <div class="container">
       <div>
         <logo />
@@ -70,6 +71,13 @@ export default {
 </script>
 
 <style lang="scss">
+$mainColor: #3351ff;
+
+.navbar {
+  background-color: $mainColor;
+  color: #ffffff;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
