@@ -11,16 +11,18 @@
     <div class="app-content">
       <div class="container">
         <div class="row">
-          <div class="col-6 text-center">
+          <div class="col-6">
             <div class="budgetinfo-box expense-box">
-              <small>Expense:</small>
-              <h1>0</h1>
+              <div class="box-header">Spent</div>
+              <div class="box-body">-$230.00</div>
+              <div class="box-footer">Expense this month</div>
             </div>
           </div>
-          <div class="col-6 text-center">
+          <div class="col-6">
             <div class="budgetinfo-box income-box">
-              <small>Income</small>
-              <h1>0</h1>
+              <div class="box-header">Earned</div>
+              <div class="box-body">+$983.00</div>
+              <div class="box-footer">Incomes this month</div>
             </div>
           </div>
         </div>
@@ -35,6 +37,13 @@ import Logo from "~/components/Logo.vue";
 
 export default {
   middleware: "auth",
+  head() {
+    return {
+      bodyAttrs: {
+        class: "main-app"
+      }
+    };
+  },
   components: {
     Logo
   },
@@ -86,24 +95,45 @@ export default {
 <style lang="scss">
 $mainColor: #3351ff;
 
+body.main-app {
+  background-color: #f6f7fc;
+}
+
 .navbar {
   background-color: $mainColor;
   color: #ffffff;
 }
 
-.budgetinfo-box{
-  border-radius: 1em;
+.budgetinfo-box {
+  border-radius: 0.5em;
   margin-top: 1em;
   color: #fff;
-  padding: .5em .25em;
-  &.expense-box{
-    background-color: #f5787e;
+  padding: 0.5em 1em;
+  box-shadow: 0 0 4px 1px #707488;
+  &.expense-box {
+    background: rgb(237, 96, 149);
+    background: linear-gradient(
+      62deg,
+      rgba(237, 96, 149, 1) 55%,
+      rgba(247, 158, 176, 1) 100%
+    );
   }
-  &.income-box{
-    background-color: #03a9f4;
+  &.income-box {
+    background: rgb(48, 202, 148);
+    background: linear-gradient(
+      62deg,
+      rgba(48, 202, 148, 1) 20%,
+      rgba(110, 234, 146, 1) 100%
+    );
+  }
+  .box-header, .box-footer{
+    font-weight: 200;
+  }
+  .box-body {
+    font-size: 1.5em;
+    font-weight: 600;
   }
 }
-
 
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
