@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="navbar">
-      Budget-App | Hello, {{user.displayName}}!
+      Budget-App | Hello, <nuxt-link to="/profile">{{user.displayName}}</nuxt-link>!
       <a
         href="javascript:void();"
         class="text-white"
@@ -243,120 +243,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $mainColor: #3351ff;
-
-body.main-app {
-  background-color: #f6f7fc;
-}
-
-.navbar {
-  background-color: $mainColor;
-  color: #ffffff;
-}
-
-.box {
-  border-radius: 0.5em;
-  margin-top: 1em;
-  color: #fff;
-  padding: 0.5em 1em;
-  box-shadow: 0 0 4px 1px #707488;
-
-  &.budgetinfo-box {
-    &.expense-box {
-      background: rgb(237, 96, 149);
-      background: linear-gradient(
-        62deg,
-        rgba(237, 96, 149, 1) 55%,
-        rgba(247, 158, 176, 1) 100%
-      );
-    }
-    &.income-box {
-      background: rgb(48, 202, 148);
-      background: linear-gradient(
-        62deg,
-        rgba(48, 202, 148, 1) 20%,
-        rgba(110, 234, 146, 1) 100%
-      );
-    }
-    .box-header,
-    .box-footer {
-      font-weight: 200;
-    }
-    .box-body {
-      font-size: 1.5em;
-      font-weight: 600;
-    }
-  }
-
-  &.budgetList-box {
-    box-shadow: none;
-    background-color: #fff;
-    color: #000;
-
-    .box-header {
-      color: #696767;
-      font-weight: 600;
-
-      &.two-col {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-
-    .box-body {
-      margin: 1em 0;
-    }
-
-    .box-body .item {
-      display: flex;
-      justify-content: space-between;
-      margin: 0.5em 0;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-      .metadata {
-        display: flex;
-        flex-grow: 1;
-        flex-direction: row;
-
-        .category-icon {
-          align-self: center;
-          background-color: aqua;
-          border-radius: 50%;
-          width: 3em;
-          height: 3em;
-          text-align: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-right: 0.5em;
-          color: #fff;
-        }
-
-        .multiLine {
-          flex-grow: 1;
-
-          .category-name {
-            font-weight: 600;
-          }
-
-          .description {
-            font-weight: 200;
-            color: #696767;
-            font-size: 0.9em;
-          }
-        }
-      }
-      .price {
-        font-weight: 600;
-      }
-    }
-  }
-}
 
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
