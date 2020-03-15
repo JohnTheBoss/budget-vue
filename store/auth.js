@@ -29,7 +29,7 @@ const mutations = {
   SET_AUTH_USER: (state, { authUser }) => {
     state.authUser = {
       uid: authUser.uid,
-      avatar: authUser.PhotoUrl === null ? authUser.PhotoUrl : null,
+      avatar: authUser.photoURL !== null ? authUser.photoURL : null,
       displayName: authUser.displayName,
       email: authUser.email
     };
