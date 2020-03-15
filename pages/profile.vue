@@ -4,7 +4,7 @@
       <nuxt-link to="/">Budget-App</nuxt-link>
       | Hello, {{user.displayName}}!
       <a
-        href="javascript:void();"
+        href="javascript:void(0);"
         class="text-white"
         @click="logout()"
       >Logout</a>

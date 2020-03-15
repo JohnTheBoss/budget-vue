@@ -3,7 +3,7 @@
     <div class="navbar">
       Budget-App | Hello, <nuxt-link to="/profile">{{user.displayName}}</nuxt-link>!
       <a
-        href="javascript:void();"
+        href="javascript:void(0);"
         class="text-white"
         @click="logout()"
       >Logout</a>
