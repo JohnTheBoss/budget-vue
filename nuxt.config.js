@@ -1,76 +1,96 @@
-require('dotenv').config();
+require("dotenv").config();
+
+const isProd = function() {
+  return process.env.NODE_ENV === "production";
+};
 
 export default {
-  mode: 'spa',
+  mode: "spa",
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: "Budget-App",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: "An app to keep track of your finances."
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#3351ff" },
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: ["@/assets/style.scss"],
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-  ],
+   ** Plugins to load before mounting the App
+   */
+  plugins: [],
   /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-  ],
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    "@nuxtjs/axios",
+    "@nuxtjs/pwa",
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    "@nuxtjs/dotenv",
     // Docs: https://firebase.nuxtjs.org/guide
-    '@nuxtjs/firebase',
+    "@nuxtjs/firebase",
     [
-      'nuxt-fontawesome', {
-        component: 'fa', 
+      "nuxt-fontawesome",
+      {
+        component: "fa",
         imports: [
           {
-            set: '@fortawesome/free-solid-svg-icons',
-            icons: ['fas']
+            set: "@fortawesome/free-solid-svg-icons",
+            icons: ["fas"]
           },
           {
-            set: '@fortawesome/free-brands-svg-icons',
-            icons: ['fab']
+            set: "@fortawesome/free-brands-svg-icons",
+            icons: ["fab"]
           },
           {
-            set: '@fortawesome/free-regular-svg-icons',
-            icons: ['far']
+            set: "@fortawesome/free-regular-svg-icons",
+            icons: ["far"]
           }
         ]
       }
     ]
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
-  axios: {
+
+  pwa: {
+    manifest: {
+      charset: "UTF-8",
+      lang: 'en',
+      name: "BudgetApp",
+      short_name: "BudgetApp - Track your finances",
+      description: "An app to keep track of your finances.",
+      display: 'standalone',
+      theme_color: '#3351ff'
+    },
+    workbox: {
+      dev: !isProd()
+    }
   },
+
+  /*
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
+  axios: {},
 
   firebase: {
     config: {
@@ -86,22 +106,21 @@ export default {
     services: {
       auth: {
         initialize: {
-          onSuccessAction: 'auth/handleSuccessfulAuthentication',
+          onSuccessAction: "auth/handleSuccessfulAuthentication",
           ssr: false
         }
       },
-      realtimeDb: true,
+      realtimeDb: true
     }
   },
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
-    }
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {}
   }
-}
+};
