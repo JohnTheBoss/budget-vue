@@ -12,19 +12,170 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <div class="budgetinfo-box expense-box">
+            <div class="box budgetinfo-box expense-box">
               <div class="box-header">Spent</div>
               <div class="box-body">-$230.00</div>
               <div class="box-footer">Expense this month</div>
             </div>
           </div>
           <div class="col-6">
-            <div class="budgetinfo-box income-box">
+            <div class="box budgetinfo-box income-box">
               <div class="box-header">Earned</div>
               <div class="box-body">+$983.00</div>
               <div class="box-footer">Incomes this month</div>
             </div>
           </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="box budgetList-box">
+              <div class="box-header two-col">
+                <div class="left">Today</div>
+                <div class="right">-$3600</div>
+              </div>
+              <div class="box-body">
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="box budgetList-box">
+              <div class="box-header two-col">
+                <div class="left">Yesterday</div>
+                <div class="right">-$3600</div>
+              </div>
+              <div class="box-body">
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <div class="col-12">
+            <div class="box budgetList-box">
+              <div class="box-header two-col">
+                <div class="left">05. Marc</div>
+                <div class="right">-$3600</div>
+              </div>
+              <div class="box-body">
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+
+                <div class="item">
+                  <div class="metadata">
+                    <div class="category-icon">
+                      <fa :icon="['fas', 'shopping-cart']" />
+                    </div>
+                    <div class="multiLine">
+                      <div class="category-name">Shopping</div>
+                      <div class="description">New Notebook</div>
+                    </div>
+                  </div>
+                  <div class="price">-$1200</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -104,34 +255,106 @@ body.main-app {
   color: #ffffff;
 }
 
-.budgetinfo-box {
+.box {
   border-radius: 0.5em;
   margin-top: 1em;
   color: #fff;
   padding: 0.5em 1em;
   box-shadow: 0 0 4px 1px #707488;
-  &.expense-box {
-    background: rgb(237, 96, 149);
-    background: linear-gradient(
-      62deg,
-      rgba(237, 96, 149, 1) 55%,
-      rgba(247, 158, 176, 1) 100%
-    );
+
+  &.budgetinfo-box {
+    &.expense-box {
+      background: rgb(237, 96, 149);
+      background: linear-gradient(
+        62deg,
+        rgba(237, 96, 149, 1) 55%,
+        rgba(247, 158, 176, 1) 100%
+      );
+    }
+    &.income-box {
+      background: rgb(48, 202, 148);
+      background: linear-gradient(
+        62deg,
+        rgba(48, 202, 148, 1) 20%,
+        rgba(110, 234, 146, 1) 100%
+      );
+    }
+    .box-header,
+    .box-footer {
+      font-weight: 200;
+    }
+    .box-body {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
   }
-  &.income-box {
-    background: rgb(48, 202, 148);
-    background: linear-gradient(
-      62deg,
-      rgba(48, 202, 148, 1) 20%,
-      rgba(110, 234, 146, 1) 100%
-    );
-  }
-  .box-header, .box-footer{
-    font-weight: 200;
-  }
-  .box-body {
-    font-size: 1.5em;
-    font-weight: 600;
+
+  &.budgetList-box {
+    box-shadow: none;
+    background-color: #fff;
+    color: #000;
+
+    .box-header {
+      color: #696767;
+      font-weight: 600;
+
+      &.two-col {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .box-body {
+      margin: 1em 0;
+    }
+
+    .box-body .item {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5em 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .metadata {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: row;
+
+        .category-icon {
+          align-self: center;
+          background-color: aqua;
+          border-radius: 50%;
+          width: 3em;
+          height: 3em;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 0.5em;
+          color: #fff;
+        }
+
+        .multiLine {
+          flex-grow: 1;
+
+          .category-name {
+            font-weight: 600;
+          }
+
+          .description {
+            font-weight: 200;
+            color: #696767;
+            font-size: 0.9em;
+          }
+        }
+      }
+      .price {
+        font-weight: 600;
+      }
+    }
   }
 }
 
