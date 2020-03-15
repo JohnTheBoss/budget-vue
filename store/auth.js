@@ -41,6 +41,10 @@ const mutations = {
 
   UPDATE_EMAIL: (state, newEmail) => {
     state.authUser.email = newEmail;
+  },
+
+  SET_AVATAR_URL: (state, profileURL) => {
+    state.authUser.avatar = profileURL;
   }
 };
 
@@ -61,6 +65,32 @@ const actions = {
       // Reset store
       commit("RESET_STORE");
     }
+  },
+
+  async UploadProfileImage({ commit, state }, file) {
+    // Get current username
+    const user = this.$fireAuth.currentUser;
+    const ext = file.name.split(".").slice(-1)[0];
+    // Create a Storage Ref w/ userID
+    const storageRef = this.$fireStorage.ref(
+      "/profiles/"+ user.uid + "/avatar"
+    );
+
+    // Upload file
+    const profile = storageRef.put(file);
+
+    await profile.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+      user
+        .updateProfile({
+          photoURL: downloadURL
+        })
+        .then(() => {
+          commit("SET_AVATAR_URL", downloadURL);
+        })
+        .catch(error => {
+          alert(error);
+        });
+    });
   },
 
   // TODO: if email change logout user!
@@ -100,14 +130,13 @@ const actions = {
           });
       }
 
-      if(changeArr.length === 2){
+      if (changeArr.length === 2) {
         return "ALL_DATA_UPDATED_PLS_RELOGIN";
-      } else if(changeArr.length > 0) {
-        return "UPDATED_"+changeArr[0];
+      } else if (changeArr.length > 0) {
+        return "UPDATED_" + changeArr[0];
       } else {
         return "NO_UPDATE";
       }
-
     } catch (e) {
       console.log(e);
     }
