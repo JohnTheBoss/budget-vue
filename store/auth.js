@@ -56,6 +56,7 @@ const actions = {
   },
 
   async logoutUser({ commit, dispatch }) {
+    const APPROUTER = this.app.router;
     try {
       await this.$fireAuth.signOut();
     } catch (e) {
@@ -64,6 +65,7 @@ const actions = {
     } finally {
       // Reset store
       commit("RESET_STORE");
+      APPROUTER.push("/auth/login");
     }
   },
 
@@ -95,6 +97,7 @@ const actions = {
 
   // TODO: if email change logout user!
   async updateUserData({ commit, state }, userInfo) {
+    const APPROUTER = this.app.router;
     try {
       const user = this.$fireAuth.currentUser;
       let credential;
@@ -123,6 +126,7 @@ const actions = {
           .updateEmail(userInfo.email)
           .then(() => {
             commit("UPDATE_EMAIL", userInfo.email);
+            // APPROUTER.push("/auth/login");
             return "EMAIL_OK";
           })
           .catch(error => {
@@ -155,7 +159,7 @@ const actions = {
       return await user
         .updatePassword(userPasswords.password)
         .then(function() {
-          // this.dispatch("auth/logoutUser"); // Client site Logout User
+          this.dispatch("auth/logoutUser"); // Client site Logout User
           return "PASSWORD_CHANGED_LOGIN_NEW_PASSWORD";
         })
         .catch(function(error) {
