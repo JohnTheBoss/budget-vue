@@ -73,7 +73,7 @@ const actions = {
     const ext = file.name.split(".").slice(-1)[0];
     // Create a Storage Ref w/ userID
     const storageRef = this.$fireStorage.ref(
-      "/profiles/"+ user.uid + "/avatar"
+      "/profiles/" + user.uid + "/avatar"
     );
 
     // Upload file
@@ -139,6 +139,30 @@ const actions = {
       }
     } catch (e) {
       console.log(e);
+    }
+  },
+
+  async ChangeUserPassword({}, userPasswords) {
+    const user = this.$fireAuth.currentUser;
+
+    if (
+      userPasswords.password === userPasswords.again ||
+      userPasswords.password !== null ||
+      userPasswords.again !== null ||
+      userPasswords.password !== "" ||
+      userPasswords.again !== ""
+    ) {
+      return await user
+        .updatePassword(userPasswords.password)
+        .then(function() {
+          // this.dispatch("auth/logoutUser"); // Client site Logout User
+          return "PASSWORD_CHANGED_LOGIN_NEW_PASSWORD";
+        })
+        .catch(function(error) {
+          throw error;
+        });
+    } else {
+      throw "TWO_PASSWORD_NOT_EQUAL";
     }
   }
 };
