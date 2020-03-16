@@ -75,7 +75,7 @@
           </div>
 
           <div class="col-12">
-            <div class="box profile-box">
+            <div class="box profile-avatar-box">
               <div class="box-header">Change Profile Image</div>
               <div class="box-body">
                 <div class="custom-file">
@@ -94,6 +94,42 @@
               </div>
               <div class="box-footer mt-3">
                 <button class="btn btn-success btn-block" @click="UploadProfileImage()">Upload</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="box profile-passwordChange-box">
+              <div class="box-header">Change Your Password</div>
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="new-password">New Password</label>
+                  <input
+                    type="password"
+                    id="new-password"
+                    class="form-control"
+                    v-model="profilPassword.password"
+                    placeholder="New Password"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="new-again-password">New Password Again</label>
+                  <input
+                    type="password"
+                    id="new-again-password"
+                    class="form-control"
+                    v-model="profilPassword.again"
+                    placeholder="New Password Again"
+                  />
+                </div>
+              </div>
+              <div class="box-footer mt-3">
+                <button
+                  class="btn btn-primary btn-block"
+                  :disabled="(profilPassword.password !== profilPassword.again) || (profilPassword.password === null 
+                  || profilPassword.password === '' || profilPassword.again === null || profilPassword.again === '')"
+                  @click="ChangeUserPassword()"
+                >Change Password</button>
               </div>
             </div>
           </div>
@@ -120,7 +156,11 @@ export default {
     return {
       profilDataEdit: false,
       profilData: {},
-      profileImage: null
+      profileImage: null,
+      profilPassword: {
+        password: null,
+        again: null
+      }
     };
   },
   computed: {
@@ -137,7 +177,8 @@ export default {
     ...mapActions({
       logoutUser: "auth/logoutUser",
       updateUserData: "auth/updateUserData",
-      uploadProfileImage: "auth/UploadProfileImage"
+      uploadProfileImage: "auth/UploadProfileImage",
+      changePassword: "auth/ChangeUserPassword"
     }),
 
     selectProfileImageInInput(event) {
@@ -164,6 +205,17 @@ export default {
         this.uploadProfileImage(this.profileImage);
       } catch (error) {
         alert(error);
+      }
+    },
+
+    async ChangeUserPassword() {
+      try {
+        await this.changePassword(this.profilPassword).then(data => {
+          alert("Password changed successfully, please sign in with the new one!");
+          this.logout();
+        });
+      } catch (e) {
+        alert(e);
       }
     },
 

@@ -173,12 +173,16 @@ body.main-app {
       }
     }
 
-    &.profile-box {
+    &.profile-box,
+    &.profile-avatar-box,
+    &.profile-passwordChange-box {
       box-shadow: none;
       background-color: #fff;
+      margin-bottom: 1em;
       .box-header {
         color: #696767;
         font-weight: 600;
+        padding-bottom: 1em;
       }
 
       .box-body {
